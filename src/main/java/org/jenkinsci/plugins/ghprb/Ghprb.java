@@ -138,8 +138,8 @@ public class Ghprb {
         return Pattern.compile(trigger.getDescriptor().getOkToTestPhrase());
     }
 
-    private String triggerPhrase() {
-        return trigger.getTriggerPhrase();
+    private Pattern triggerPhrase() {
+        return Pattern.compile(trigger.getTriggerPhrase());
     }
 
     private HashSet<String> admins() {
@@ -176,7 +176,7 @@ public class Ghprb {
     }
 
     public boolean isTriggerPhrase(String comment) {
-        return !triggerPhrase().equals("") && comment != null && comment.contains(triggerPhrase());
+        return triggerPhrase().matcher(comment).matches();
     }
 
     public boolean ifOnlyTriggerPhrase() {
